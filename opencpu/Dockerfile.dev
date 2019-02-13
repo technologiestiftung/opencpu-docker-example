@@ -1,6 +1,14 @@
 FROM opencpu/rstudio
+
+LABEL maintainer="moron-zirfas@technologiestiftung-berlin.de"
+LABEL "de.technologiestiftung-berlin"="Technologiestiftung Berlin"
+LABEL version="0.1.0"
+LABEL description="This is a development setup for running opencpu and RStudio to test our package fhpredict"
+
 RUN R -e "install.packages(\"devtools\")"
 # until https://github.com/technologiestiftung/fhpredict/pull/12
 # is merged we use the sha of the commit to build it
 # RUN R -e "devtools::install_github(\"technologiestiftung/fhpredict@v0.1.0-beta\")"
 RUN R -e "devtools::install_github(\"technologiestiftung/fhpredict@19fd2aca545c\")"
+EXPOSE 8004
+EXPOSE 80
