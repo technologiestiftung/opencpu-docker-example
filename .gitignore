@@ -1,5 +1,5 @@
 # vscode files
-.vscode/settings.json
+.vscode/
 # these files are crated by R Studio in the container
 # we can ignore these.
 notes.txt

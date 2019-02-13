@@ -39,7 +39,7 @@ Basic instructions about opencpu can be found here: [www.opencpu.org/download.ht
 **!Hint:** Since PORT 80 is used we need to use the 8004 PORT:
 
 - opencpu api explorer is at [http://localhost:8004/ocpu](http://localhost:8004/ocpu)
-- rstudio  is at [http://localhost:8004/rstudio](http://localhost:8004/rstudio) (user: opencpu password: opencpu)
+- rstudio is at [http://localhost:8004/rstudio](http://localhost:8004/rstudio) (user: opencpu password: opencpu)
 
 ### Add Files to the Container
 
@@ -56,6 +56,11 @@ $ cd path/to/repository
 # if you didn't do changes to opencpu/Dockerfile.dev
 # You can ommit the --build flag
 $ docker-compose up --build
+> Starting opencpu-docker_opencpu_1 ... done
+> Attaching to opencpu-docker_opencpu_1
+> opencpu_1  |  * Starting periodic command scheduler cron
+> opencpu_1  |    ...done.
+> …
 ```
 
 Open your browser and start hacking
@@ -65,7 +70,10 @@ Stop it:
 End the terminal session by hitting `CTRL + C` and stop the containers (all changes other the done to the files in `workspace:/home/opencpu` will be lost)
 
 ```bash
-docker-compose down
+$ docker-compose down
+> Stopping opencpu-docker_opencpu_1 ... done
+> Removing opencpu-docker_opencpu_1 ... done
+> Removing network opencpu-docker_default
 ```
 
 ### Start a Session in the Container
@@ -81,7 +89,9 @@ $ docker ps
 Use the Container ID or the NAMES property to run the bash session.
 
 ```bash
-docker exec -it <CONTANER ID | NAME> bash
+$ docker exec -it <CONTANER ID | NAME> bash
+> sends you into a session in the container
+> …
 ```
 
 ### Add R Packages or other Dependencies
@@ -98,11 +108,12 @@ Then run again a `docker-compose up --build` from the root of the repo.
 The image is based on Ubuntu 18.
 
 ```txt
-Distributor ID:	Ubuntu
-Description:	Ubuntu 18.04.1 LTS
-Release:	18.04
-Codename:	bionic
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.1 LTS
+Release:        18.04
+Codename:       bionic
 ```
+
 To install other dependencies `RUN` the usual `apt-get` commands in the docker file.
 
 **!Hint:** The commands don't allow an interactive prompt. Add the `-y` flag to accept all `Y/n` questions.  
@@ -112,7 +123,6 @@ For example to install `curl` you could `RUN`
 ```docker
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 ```
-
 
 ### Test the opencpu API
 
@@ -178,7 +188,7 @@ curl -X GET "http://localhost:8004/ocpu/tmp/x0aa062559b9cf1/R/.val"
 #### **GET** - /ocpu/info
 
 **Description:** From the api docs.  
-> The `/ocpu/info` endpoint shows the output of sessionInfo() from the main (webserver) process. This can be helpful for debugging. The /ocpu/test URL gives you a handy testing web page to perform server requests.
+> The `/ocpu/info` endpoint shows the output of sessionInfo() from the main (web server) process. This can be helpful for debugging. The /ocpu/test URL gives you a handy testing web page to perform server requests.
 
 See also [https://www.opencpu.org/api.html#api-libraries](https://www.opencpu.org/api.html#api-libraries)
 
@@ -190,7 +200,7 @@ curl -X GET "http://localhost:8004/ocpu/info"
 
 #### **GET** - /ocpu/library/fhpredict/info
 
-**Description:** Show information about the pacakge fhpredict package. See also [https://www.opencpu.org/api.html#api-libraries](https://www.opencpu.org/api.html#api-libraries)
+**Description:** Show information about the package fhpredict package. See also [https://www.opencpu.org/api.html#api-libraries](https://www.opencpu.org/api.html#api-libraries)
 
 Requests using CURL
 
