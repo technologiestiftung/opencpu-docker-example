@@ -1,0 +1,6 @@
+FROM opencpu/rstudio
+RUN R -e "install.packages(\"devtools\")"
+# until https://github.com/technologiestiftung/fhpredict/pull/12
+# is merged we use the sha of the commit to build it
+# RUN R -e "devtools::install_github(\"technologiestiftung/fhpredict@v0.1.0-beta\")"
+RUN R -e "devtools::install_github(\"technologiestiftung/fhpredict@19fd2aca545c\")"

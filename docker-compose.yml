@@ -1,0 +1,12 @@
+# docker-compose.yml
+version: '3'
+services:
+  opencpu:
+    volumes:
+      - ./workspace:/home/opencpu
+    build:
+      context: ./opencpu
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:80
+      - 8004:8004
